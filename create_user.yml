@@ -1,5 +1,5 @@
 - name: Onboard Users and Group
-- hosts: ALL
+- hosts: all
   remote_user: ansible
   become: yes
   become_method: sudo
