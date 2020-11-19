@@ -1,6 +1,6 @@
 - name: Onboard Users and Group
   hosts: all
-  remote_user: ansible
+  remote_user: coc
   become: yes
   become_method: sudo
   gather_facts: no
