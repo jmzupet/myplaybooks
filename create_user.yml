@@ -1,5 +1,5 @@
 - name: Onboard Users and Group
-- hosts: 169.62.62.177
+- hosts: all
   remote_user: ansible
   become: yes
   become_method: sudo
