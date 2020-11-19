@@ -1,8 +1,4 @@
----
-- name: Onboard Users and Groups
-- Playbook to create groups and users that normally exist within HCLS markets. Focus for this Playbook is to use or workflow with service management platform
-- to automate onboarding of users and assigning them to specfic groups
----
+- name: Onboard Users and Group
 - hosts: ALL
   remote_user: ansible
   become: yes
