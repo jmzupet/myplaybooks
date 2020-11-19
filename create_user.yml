@@ -1,9 +1,99 @@
 ---
-- name: Play to create a user
-  hosts: all
+- name: Onboard Users and Groups
+- Playbook to create groups and users that normally exist within HCLS markets. Focus for this Playbook is to use or workflow with service management platform
+- to automate onboarding of users and assigning them to specfic groups
+---
+- hosts: ALL
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
   tasks:
-    - name: create a user 
-      user:
-        name: alice
-        shell: /bin/bash
-        state: present
+   - name: Add group "Salesforce" to remote server
+     group:
+       name: salesforce
+       gid: 2010
+       state: present
+
+   - name: Add group "Office" to remote server
+     group:
+       name: office
+       gid: 2011
+       state: present
+
+   - name: Add group "Genomics" to remote server
+     group:
+       name: genomics
+       gid: 2012
+       state: present 
+
+   - name: Add user "sysadmin" to remote server
+     user:
+       name: sysadmin
+       comment: "Privileged User"
+       uid: 2001
+       group: salesforce
+       groups: office,genomics
+       append: yes
+       shell: /bin/bash
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Add user "Obejwan" to remote server
+     user:
+       name: obejwan
+       comment: "Accountant UnPrivileged User"
+       uid: 2002
+       group: office
+       shell: /bin/bash
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Add user "Yoda" to remote server
+     user:
+       name: yoda
+       comment: "Content creator UnPrivileged User"
+       uid: 2003
+       group: office
+       shell: /bin/bash
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Add user "rajesh" to remote server
+     user:
+       name: rajesh
+       comment: "Unix Admin Privileged User"
+       uid: 2004
+       group: salesforce
+       groups: office,genomics
+       append: yes
+       shell: /bin/sh
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Add user "Guest001" to remote server
+     user:
+       name: guest001
+       comment: "Temp account"
+       uid: 2005
+       group: genomics
+       shell: /bin/bash
+       createhome: no
+       password: ''
+       expires: 1525198731
+
+   - name: Force user "Guest001" to change the password
+     command: 
+         chage -d 0 guest001
+
+   - name: Remove user "Games" from remote server
+     user:
+       name: games
+       state: absent
+       remove: yes
+...
