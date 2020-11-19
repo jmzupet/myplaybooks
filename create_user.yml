@@ -40,6 +40,7 @@
    - name: Add user "Obejwan" to remote server
      user:
        name: obejwan
+       create password: ''
        comment: "Accountant UnPrivileged User"
        uid: 2002
        group: office
