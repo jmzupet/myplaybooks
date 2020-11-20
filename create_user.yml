@@ -1,10 +1,5 @@
 - name: Onboard Users and Group
   hosts: all
-  remote_user: coc
-  become: yes
-  become_method: sudo
-  gather_facts: no
-  connection: ssh
   tasks:
    - name: Add group "Salesforce" to remote server
      group:
@@ -40,7 +35,7 @@
    - name: Add user "Obejwan" to remote server
      user:
        name: obejwan
-       create password: ''
+       password: ''
        comment: "Accountant UnPrivileged User"
        uid: 2002
        group: office
@@ -52,6 +47,7 @@
    - name: Add user "Yoda" to remote server
      user:
        name: yoda
+       password: ''
        comment: "Content creator UnPrivileged User"
        uid: 2003
        group: office
@@ -63,7 +59,8 @@
    - name: Add user "rajesh" to remote server
      user:
        name: rajesh
-       comment: "Unix Admin Privileged User"
+       password: ''
+       comment: "Sales Force Privileged User"
        uid: 2004
        group: salesforce
        groups: office,genomics
@@ -73,24 +70,4 @@
        ssh_key_bits: 2048
        ssh_key_file: .ssh/id_rsa
 
-   - name: Add user "Guest001" to remote server
-     user:
-       name: guest001
-       comment: "Temp account"
-       uid: 2005
-       group: genomics
-       shell: /bin/bash
-       createhome: no
-       password: ''
-       expires: 1525198731
-
-   - name: Force user "Guest001" to change the password
-     command: 
-         chage -d 0 guest001
-
-   - name: Remove user "Games" from remote server
-     user:
-       name: games
-       state: absent
-       remove: yes
 ...
