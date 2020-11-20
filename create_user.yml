@@ -35,7 +35,7 @@
    - name: Add user "Obejwan" to remote server
      user:
        name: obejwan
-       password: ''
+       password: 'password'
        comment: "Accountant UnPrivileged User"
        uid: 2002
        group: office
@@ -47,7 +47,7 @@
    - name: Add user "Yoda" to remote server
      user:
        name: yoda
-       password: ''
+       password: 'password'
        comment: "Content creator UnPrivileged User"
        uid: 2003
        group: office
@@ -59,7 +59,7 @@
    - name: Add user "rajesh" to remote server
      user:
        name: rajesh
-       password: ''
+       password: 'password'
        comment: "Sales Force Privileged User"
        uid: 2004
        group: salesforce
